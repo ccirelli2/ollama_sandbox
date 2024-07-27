@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "ollama-sandbox"
+version = "0.1.0"
+description = ""
+authors = ["ccirelli2 <ccirelli2@gmail.com>"]
+readme = "README.md"
+packages = [{include="src"}]                                                     
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+ollama = "^0.2.0"
+transformers = "^4.41.2"
+torch = "^2.3.0"
+fastembed = "^0.3.4"
+pytesseract = "^0.3.10"
+pillow = "^10.4.0"
+pdf2image = "^1.17.0"
+pandas = "^2.2.2"
+fastparquet = "^2024.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
