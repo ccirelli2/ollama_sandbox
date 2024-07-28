@@ -1,18 +1,38 @@
+import os
+import pandas as pd
 from fastembed import TextEmbedding
 from typing import List
 
-# Example list of documents
-documents: List[str] = [
-    "This is built to be faster and lighter than other embedding libraries e.g. Transformers, Sentence-Transformers, etc.",
-    "fastembed is supported by and maintained by Qdrant.",
-]
+# Globals
+DIR_DATA = "/Users/temp-admin/repositories/ollama_sandbox/data"
+DIR_CHUNKS = os.path.join(DIR_DATA, "chunks")
+DIR_EMBEDDINGS = os.path.join(DIR_DATA, "embeddings")
+FILE_NAME = "chunks.parquet"
 
-# This will trigger the model download and initialization
-embedding_model = TextEmbedding()
-print("The model BAAI/bge-small-en-v1.5 is ready to use.")
+# Load File
+path = os.path.join(DIR_CHUNKS, FILE_NAME)
+chunk_df = pd.read_parquet(path)
 
-embeddings_generator = embedding_model.embed(documents)  # reminder this is a generator
-embeddings_list = list(embedding_model.embed(documents))
+# Model
+model = TextEmbedding()
+
+# Generate Embeddings
+print("Generating Embeddings")
+chunk_df['embeddings'] = list(
+    map(
+        lambda x: list(model.embed(x))[0].tolist(),
+        chunk_df['chunk_text'].values
+    )
+)
+
+
+# Write Embeddings to file
+path = os.path.join(DIR_EMBEDDINGS, "embeddings.parquet")
+print(f"Writing file to {path}")
+chunk_df.to_parquet(path)
+
+print("Script finished")
+
 
 
 

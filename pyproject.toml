@@ -17,6 +17,8 @@ pillow = "^10.4.0"
 pdf2image = "^1.17.0"
 pandas = "^2.2.2"
 fastparquet = "^2024.5.0"
+langchain = "^0.2.11"
+langchain-community = "^0.2.10"
 
 
 [build-system]

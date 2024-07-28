@@ -12,14 +12,15 @@ DIR_ROOT = "/Users/temp-admin/repositories/ollama_sandbox"
 DIR_DATA = os.path.join(DIR_ROOT, 'data')
 DIR_CHUNKS = os.path.join(DIR_DATA, 'chunks')
 DIR_EMBEDDINGS = os.path.join(DIR_DATA, "embeddings")
-FILE_NAME = "chunk_embeddings.parquet"
+FILE_NAME = "embeddings.parquet"
 
 # Load Data
 use_cols = []
 chunk_df = pd.read_parquet(
     path=os.path.join(DIR_EMBEDDINGS, FILE_NAME),
-    columns=["chunk_ids", "chunks", "embeddings"],
+    columns=["chunk_id", "chunk_text", "embeddings"],
 )
+
 
 # Create Query
 """

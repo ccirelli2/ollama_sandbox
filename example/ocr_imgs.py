@@ -21,5 +21,25 @@ else:
     print(f"Output directory exists at {DIR_TEXT}")
 
 # Convert Image to Text
-text = pytesseract.image_to_string(
-    Image.open(os.path.join(DIR_IMGS, 'image0.png')))
+print("Obtaining images")
+images = os.listdir(DIR_IMGS)
+
+# Iterate Images
+for img in images:
+    # Create Path
+    path = os.path.join(DIR_IMGS, img)
+    
+    # OCR Image
+    text = pytesseract.image_to_string(Image.open(path))
+    
+    # Write Text to Directory
+    filename = img.replace("image", "page").replace(".png", ".text")
+    path = os.path.join(DIR_TEXT, filename)
+    print(f"Writing {filename}")
+    with open(path, 'w') as f:
+        f.write(text)
+
+print("Process completed")
+        
+
+
